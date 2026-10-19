@@ -1,0 +1,123 @@
+:root {
+  --bg: #ffe6e8;
+  --card: #fff;
+  --text: #5a2a3a;
+  --yes: #ff3d6e;
+  --yes-hover: #e8235a;
+  --no: #f1d5db;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Noto Sans Lao", "Noto Sans Thai", sans-serif;
+}
+
+.card {
+  position: relative;
+  width: min(440px, 100%);
+  min-height: 460px;
+  padding: 32px 24px;
+  background: var(--card);
+  border-radius: 24px;
+  box-shadow: 0 10px 30px #ff3d6e2e, 0 2px 6px #0000000d;
+  text-align: center;
+  display: grid;
+  align-items: center;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  animation: pop-in 0.5s ease-out;
+}
+
+.gif {
+  width: 180px;
+  height: 180px;
+  border-radius: 16px;
+  object-fit: contain;
+}
+
+.gif-fallback {
+  font-size: 110px;
+  line-height: 180px;
+  height: 180px;
+  animation: bounce 1.4s ease-in-out infinite;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  line-height: 1.4;
+}
+
+h1:focus { outline: none; }
+.subtext { margin: 0; font-size: 1.1rem; line-height: 1.6; opacity: 0.85; }
+.buttons { display: flex; gap: 16px; justify-content: center; align-items: center; }
+.no-slot { display: inline-block; width: 130px; min-height: 54px; }
+
+button {
+  font: inherit;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+button:focus-visible { outline: 3px solid var(--text); outline-offset: 4px; }
+.btn-yes {
+  background: var(--yes);
+  color: #fff;
+  white-space: nowrap;
+  box-shadow: 0 6px 16px #ff3d6e66;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.btn-yes:hover, .btn-yes:focus-visible { transform: scale(1.12); background: var(--yes-hover); }
+.btn-no {
+  background: var(--no);
+  color: var(--text);
+  max-width: calc(100% - 16px);
+  overflow-wrap: anywhere;
+  touch-action: none;
+  transition: left 0.25s ease-out, top 0.25s ease-out;
+  z-index: 2;
+}
+
+.celebration { position: fixed; inset: 0; overflow: hidden; pointer-events: none; }
+.heart { position: absolute; bottom: -48px; animation: float-up linear forwards; }
+
+@keyframes pop-in {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes float-up {
+  to { transform: translateY(-110vh) rotate(25deg); opacity: 0; }
+}
+
+@media (max-width: 360px) {
+  .card { padding: 28px 16px; }
+  .buttons { gap: 8px; }
+  button { padding: 12px 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
